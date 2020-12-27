@@ -73,7 +73,7 @@ export let calendarHeatmap = {
 
   chart.startDate = function (value) {
     if (!arguments.length) { return startDate }
-    yearAgo = value
+    yearAgo = moment(value).toDate()
     now = moment(value).endOf('day').add(1, 'year').toDate()
     return chart
   }
