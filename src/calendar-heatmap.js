@@ -18,7 +18,7 @@ export let calendarHeatmap = {
   let max = null
   let colorRange = ['#D8E6E7', '#218380']
   let tooltipEnabled = true
-  let tooltipUnit = 'Star'
+  let tooltipUnit = 'Activity'
   let legendEnabled = true
   let onClick = null
   let weekStart = 0 //0 for Sunday, 1 for Monday
@@ -32,6 +32,7 @@ export let calendarHeatmap = {
   }
   let labelWidth = 15
   let labelHeight = 15
+  let startDay = moment().startOf('day').subtract(1, 'year').day()
 
   // setters and getters
   chart.data = function (value) {
@@ -74,7 +75,8 @@ export let calendarHeatmap = {
   chart.startDate = function (value) {
     if (!arguments.length) { return startDate }
     yearAgo = moment(value).toDate()
-    now = moment(value).endOf('day').add(1, 'year').toDate()
+    now = moment(value).endOf('day').add(1, 'year').add(-1, 'day').toDate()
+    startDay = moment(value).day()
     return chart
   }
 
@@ -119,7 +121,7 @@ export let calendarHeatmap = {
   d3.select(chart.selector()).selectAll('svg.calendar-heatmap').remove() // remove the existing chart, if it exists
 
   let dateRange = d3.time.days(yearAgo, now) // generates an array of date objects within the specified range
-  let monthRange = d3.time.months(moment(yearAgo).startOf('month').add(1, 'month').toDate(), now) // it ignores the first month if the 1st date is after the start of the month
+  let monthRange = d3.time.months(moment(yearAgo).startOf('month').toDate(), now) // it ignores the first month if the 1st date is after the start of the month
   let firstDate = moment(dateRange[0])
 
   if (max === null) { 
@@ -231,8 +233,8 @@ export let calendarHeatmap = {
           matchIndex = index
           return moment(d).isSame(element, 'month') && moment(d).isSame(element, 'year')
         })
-
-        return Math.floor(matchIndex / 7) * (SQUARE_LENGTH + SQUARE_PADDING) + labelWidth
+        
+        return Math.floor((matchIndex + startDay) / 7) * (SQUARE_LENGTH + SQUARE_PADDING) + labelWidth
       })
         .attr('y', labelHeight)  // fix these to the top
 
