@@ -310,15 +310,15 @@ export let calendarHeatmap = {
         return weekDay
       }
 
-      let daysOfChart = chart.data().map(function (day) {
-        return day.date.toDateString()
-      })
+      //let daysOfChart = chart.data().map(function (day) {
+      //  return day.date.toDateString()
+      //})
 
-      dayRects.filter(function (d) {
-        return daysOfChart.indexOf(d.toDateString()) > -1
-      }).attr('fill', function (d, i) {
-        return color(chart.data()[i].count)
-      })
+      //dayRects.filter(function (d) {
+      //  return daysOfChart.indexOf(d.toDateString()) > -1
+      //}).attr('fill', function (d, i) {
+      //  return color(chart.data()[i].count)
+      //})
     }
 
     return chart
