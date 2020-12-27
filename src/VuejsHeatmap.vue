@@ -22,12 +22,9 @@ export default {
   methods: {
     renderHeatMap() {
       let entries = this.entries || [{"counting":5,"created_at":"2020-06-21"},{"counting":1,"created_at":"2020-06-22"}]
-      
-      let startDate = this.startDate || moment().startOf('day').subtract(1, 'year').toDate()
-      let yearAgo = startDate
-      
-      let now = moment(startDate).endOf('day').add(1, 'year').toDate()
-      //let yearAgo = moment().startOf('day').subtract(1, 'year').toDate()
+           
+      let now = moment().endOf('day').toDate()
+      let yearAgo = moment().startOf('day').subtract(1, 'year').toDate()
 
       let data = d3.time.days(yearAgo, now).map((dateElement) => {
         let entry = ((dateElement) => {
@@ -57,6 +54,7 @@ export default {
       if( typeof this.height !== 'undefined' ) heatmap.height(this.height)
       if( typeof this.max !== 'undefined' ) heatmap.max(this.max)
       if( typeof this.onClick !== 'undefined' ) heatmap.onClick(this.onClick)
+      if( typeof this.startDate !== 'undefined' ) heatmap.startDate(this.startDate)
 
       heatmap()  // render the chart
     }
