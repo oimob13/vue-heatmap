@@ -5,7 +5,7 @@ export let calendarHeatmap = {
   init() {
   // defaults
   let width = 750
-  let height = 110
+  let height = 130
   let legendWidth = 150
   let selector = '.vuejs-heatmap'
   let SQUARE_LENGTH = 11
@@ -30,6 +30,8 @@ export let calendarHeatmap = {
     Less: 'Less',
     More: 'More'
   }
+  let labelWidth = 15
+  let labelHeight = 15
 
   // setters and getters
   chart.data = function (value) {
@@ -141,7 +143,7 @@ export let calendarHeatmap = {
     .attr('width', width)
     .attr('class', 'calendar-heatmap')
     .attr('height', height)
-    .style('padding', '36px')
+    //.style('padding', '36px')
 
     dayRects = svg.selectAll('.day-cell')
       .data(dateRange)  //  array of days for the last yr
@@ -154,10 +156,10 @@ export let calendarHeatmap = {
       .attr('x', function (d, i) {
         let cellDate = moment(d)
         let result = cellDate.week() - firstDate.week() + (firstDate.weeksInYear() * (cellDate.weekYear() - firstDate.weekYear()))
-        return result * (SQUARE_LENGTH + SQUARE_PADDING)
+        return result * (SQUARE_LENGTH + SQUARE_PADDING) + labelWidth
       })
       .attr('y', function (d, i) {
-        return MONTH_LABEL_PADDING + formatWeekday(d.getDay()) * (SQUARE_LENGTH + SQUARE_PADDING)
+        return MONTH_LABEL_PADDING + formatWeekday(d.getDay()) * (SQUARE_LENGTH + SQUARE_PADDING) + labelHeight
       })
 
       if (typeof onClick === 'function') {
@@ -198,19 +200,19 @@ export let calendarHeatmap = {
         .attr('width', SQUARE_LENGTH)
         .attr('height', SQUARE_LENGTH)
         .attr('x', function (d, i) { return (width - legendWidth) + (i + 1) * 13 })
-        .attr('y', height + SQUARE_PADDING)
+        .attr('y', height - SQUARE_PADDING)
         .attr('fill', function (d) { return d })
 
         legendGroup.append('text')
         .attr('class', 'calendar-heatmap-legend-text calendar-heatmap-legend-text-less')
         .attr('x', width - legendWidth - 13)
-        .attr('y', height + SQUARE_LENGTH)
+        .attr('y', height)
         .text(locale.Less)
 
         legendGroup.append('text')
         .attr('class', 'calendar-heatmap-legend-text calendar-heatmap-legend-text-more')
         .attr('x', (width - legendWidth + SQUARE_PADDING) + (colorRange.length + 1) * 13)
-        .attr('y', height + SQUARE_LENGTH)
+        .attr('y', height)
         .text(locale.More)
       }
 
@@ -232,18 +234,18 @@ export let calendarHeatmap = {
 
         return Math.floor(matchIndex / 7) * (SQUARE_LENGTH + SQUARE_PADDING)
       })
-        .attr('y', 0)  // fix these to the top
+        .attr('y', labelHeight)  // fix these to the top
 
         locale.days.forEach(function (day, index) {
           index = formatWeekday(index)
-          if (index % 2) {
+          //if (index % 2) {
             svg.append('text')
             .attr('class', 'day-initial')
-            .attr('transform', 'translate(-8,' + (SQUARE_LENGTH + SQUARE_PADDING) * (index + 1) + ')')
+            .attr('transform', 'translate(0,' + (SQUARE_LENGTH + SQUARE_PADDING) * (index + 1) + ')')
             .style('text-anchor', 'middle')
             .attr('dy', '2')
             .text(day)
-          }
+          //}
         })
       }
 
