@@ -151,7 +151,7 @@ export let calendarHeatmap = {
       .data(dateRange)  //  array of days for the last yr
 
       dayRects.enter().append('rect')
-      .attr('class', 'day-cell')
+      .attr('class', function(d) { return getDayCellClass(d) })
       .attr('width', SQUARE_LENGTH)
       .attr('height', SQUARE_LENGTH)
       .attr('fill', function(d) { return color(countForDateForColor(d)) })
@@ -308,6 +308,11 @@ export let calendarHeatmap = {
           }
         }
         return weekDay
+      }
+    
+      function getDayCellClass(d) {
+        let count = countForDateForColor(d)
+          return 'day-cell color_' + count
       }
 
       //let daysOfChart = chart.data().map(function (day) {
