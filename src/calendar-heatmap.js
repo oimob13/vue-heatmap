@@ -241,7 +241,7 @@ export let calendarHeatmap = {
           //if (index % 2) {
             svg.append('text')
             .attr('class', 'day-initial')
-            .attr('transform', 'translate(3,' + ((SQUARE_LENGTH + SQUARE_PADDING) * (index + 1) + labelHeight) + ')')
+            .attr('transform', 'translate(6,' + ((SQUARE_LENGTH + SQUARE_PADDING) * (index + 1) + labelHeight) + ')')
             .attr('text-anchor', 'middle')
             .attr('dy', '2')
             .text(day)
