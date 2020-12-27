@@ -27,7 +27,7 @@ export default {
       let yearAgo = moment().startOf('day').subtract(1, 'year').toDate()
       
       if( typeof this.startDate !== 'undefined' ) {
-        yearAgo = moment().startOf(this.startDate).toDate()
+        yearAgo = moment(this.startDate).startOf('day').toDate()
         now = moment(this.startDate).endOf('day').add(1, 'year').add(-1, 'day').toDate()
       }
 
