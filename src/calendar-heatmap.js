@@ -200,7 +200,7 @@ export let calendarHeatmap = {
         .attr('width', SQUARE_LENGTH)
         .attr('height', SQUARE_LENGTH)
         .attr('x', function (d, i) { return (width - legendWidth) + (i + 1) * 13 })
-        .attr('y', height - SQUARE_PADDING)
+        .attr('y', height - SQUARE_LENGTH)
         .attr('fill', function (d) { return d })
 
         legendGroup.append('text')
@@ -232,7 +232,7 @@ export let calendarHeatmap = {
           return moment(d).isSame(element, 'month') && moment(d).isSame(element, 'year')
         })
 
-        return Math.floor(matchIndex / 7) * (SQUARE_LENGTH + SQUARE_PADDING)
+        return Math.floor(matchIndex / 7) * (SQUARE_LENGTH + SQUARE_PADDING) + labelWidth
       })
         .attr('y', labelHeight)  // fix these to the top
 
@@ -241,8 +241,8 @@ export let calendarHeatmap = {
           //if (index % 2) {
             svg.append('text')
             .attr('class', 'day-initial')
-            .attr('transform', 'translate(0,' + (SQUARE_LENGTH + SQUARE_PADDING) * (index + 1) + ')')
-            .style('text-anchor', 'middle')
+            .attr('transform', 'translate(3,' + (SQUARE_LENGTH + SQUARE_PADDING) * (index + 1) + labelHeight + ')')
+            .style('text-anchor', 'left')
             .attr('dy', '2')
             .text(day)
           //}
