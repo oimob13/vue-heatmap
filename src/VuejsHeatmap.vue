@@ -22,9 +22,14 @@ export default {
   methods: {
     renderHeatMap() {
       let entries = this.entries || [{"counting":5,"created_at":"2020-06-21"},{"counting":1,"created_at":"2020-06-22"}]
-           
+      
       let now = moment().endOf('day').toDate()
       let yearAgo = moment().startOf('day').subtract(1, 'year').toDate()
+      
+      if( typeof this.startDate !== 'undefined' ) {
+        yearAgo = moment().startOf(this.startDate).toDate()
+        now = moment(this.startDate).endOf('day').add(1, 'year').add(-1, 'day').toDate()
+      }
 
       let data = d3.time.days(yearAgo, now).map((dateElement) => {
         let entry = ((dateElement) => {
