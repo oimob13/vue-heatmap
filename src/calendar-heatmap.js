@@ -284,13 +284,7 @@ export let calendarHeatmap = {
       }
     
       function countForDateForColor(d) {
-        let count = 0
-        let match = chart.data().findForHeatmap(function (element, index) {
-          return moment(element.date).isSame(d, 'day')
-        })
-        if (match) {
-          count = match.count
-        }
+        let count = countForDate(d)
         if (count > max) {
           count = max
         }
