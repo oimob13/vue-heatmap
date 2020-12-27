@@ -189,7 +189,7 @@ export let calendarHeatmap = {
 
       if (chart.legendEnabled()) {
         let colorRange = [color(0)]
-        for (let i = 3; i > 0; i--) {
+        for (let i = 4; i > 0; i--) {
           colorRange.push(color(max / i))
         }
 
