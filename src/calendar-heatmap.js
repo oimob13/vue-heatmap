@@ -188,9 +188,9 @@ export let calendarHeatmap = {
       }
 
       if (chart.legendEnabled()) {
-        let colorRange = [color(0)]
-        for (let i = 4; i > 0; i--) {
-          colorRange.push(color(max / i))
+        let colorRange = []
+        for (let i = 0; i < 6; i++) {
+          colorRange.push(color(i))
         }
 
         let legendGroup = svg.append('g')
@@ -198,7 +198,9 @@ export let calendarHeatmap = {
         .data(colorRange)
         .enter()
         .append('rect')
-        .attr('class', 'calendar-heatmap-legend')
+        .attr('class', function(d, i) {
+            return 'calendar-heatmap-legend color_' + i
+        })
         .attr('width', SQUARE_LENGTH)
         .attr('height', SQUARE_LENGTH)
         .attr('x', function (d, i) { return (width - legendWidth) + (i + 1) * 13 })
