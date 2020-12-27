@@ -280,6 +280,9 @@ export let calendarHeatmap = {
         if (match) {
           count = match.count
         }
+        if (count > max) {
+          count = max
+        }
         return count
       }
 
