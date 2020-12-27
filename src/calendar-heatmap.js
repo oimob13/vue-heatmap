@@ -154,7 +154,7 @@ export let calendarHeatmap = {
       .attr('class', 'day-cell')
       .attr('width', SQUARE_LENGTH)
       .attr('height', SQUARE_LENGTH)
-      .attr('fill', function(d) { return color(countForDate(d)) })
+      .attr('fill', function(d) { return color(countForDateForColor(d)) })
       .attr('x', function (d, i) {
         let cellDate = moment(d)
         let result = cellDate.week() - firstDate.week() + (firstDate.weeksInYear() * (cellDate.weekYear() - firstDate.weekYear()))
@@ -273,6 +273,17 @@ export let calendarHeatmap = {
       }
 
       function countForDate(d) {
+        let count = 0
+        let match = chart.data().findForHeatmap(function (element, index) {
+          return moment(element.date).isSame(d, 'day')
+        })
+        if (match) {
+          count = match.count
+        }
+        return count
+      }
+    
+      function countForDateForColor(d) {
         let count = 0
         let match = chart.data().findForHeatmap(function (element, index) {
           return moment(element.date).isSame(d, 'day')
