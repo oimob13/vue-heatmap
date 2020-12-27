@@ -15,7 +15,7 @@ export let calendarHeatmap = {
   let yearAgo = moment().startOf('day').subtract(1, 'year').toDate()
   let startDate = null
   let data = []
-  let max = null
+  let max = 5
   let colorRange = ['#D8E6E7', '#218380']
   let tooltipEnabled = true
   let tooltipUnit = 'Activity'
@@ -121,8 +121,12 @@ export let calendarHeatmap = {
   d3.select(chart.selector()).selectAll('svg.calendar-heatmap').remove() // remove the existing chart, if it exists
 
   let dateRange = d3.time.days(yearAgo, now) // generates an array of date objects within the specified range
-  let monthRange = d3.time.months(moment(yearAgo).startOf('month').toDate(), now) // it ignores the first month if the 1st date is after the start of the month
   let firstDate = moment(dateRange[0])
+  
+  let monthRange = d3.time.months(moment(yearAgo).startOf('month').toDate(), now) // it ignores the first month if the 1st date is after the start of the month
+  if (moment(yearAgo).date() > 15) {
+    monthRange = d3.time.months(moment(yearAgo).startOf('month').add(1, 'month').toDate(), now)
+  }
 
   if (max === null) { 
     max = d3.max(chart.data(), function (d) { return d.count }) 
