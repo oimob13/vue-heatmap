@@ -21,7 +21,7 @@ export default {
   }, 
   methods: {
     renderHeatMap() {
-      let entries = this.entries || [{"counting":2070,"created_at":"2017-06-21"},{"counting":3493,"created_at":"2017-06-22"}]
+      let entries = this.entries || [{"counting":5,"created_at":"2020-06-21"},{"counting":1,"created_at":"2020-06-22"}]
       
       let startDate = this.startDate || moment().startOf('day').subtract(1, 'year').toDate()
       let yearAgo = startDate
