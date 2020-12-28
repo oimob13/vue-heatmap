@@ -4,7 +4,7 @@ import * as d3 from 'd3'
 export let calendarHeatmap = {
   init() {
   // defaults
-  let width = 750
+  let width = 730
   let height = 130
   let legendWidth = 150
   let selector = '.vuejs-heatmap'
