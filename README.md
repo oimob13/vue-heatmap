@@ -1,4 +1,6 @@
-# vue-heatmap
+# vue-heatmap for Oimo's web app (under developing)
+
+forked from [DominikAngerer/vue-heatmap (v1.1.7)](https://github.com/DominikAngerer/vue-heatmap)
 
 > The github style inspired calendar-heatmap capsuled as an easy to use vue.js component
 
