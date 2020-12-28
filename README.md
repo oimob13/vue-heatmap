@@ -6,7 +6,7 @@ forked from [DominikAngerer/vue-heatmap (v1.1.7)](https://github.com/DominikAnge
 
 > A [d3.js](https://d3js.org/) heatmap representing time series data. Inspired by Github's contribution chart
 
-![Reusable D3.js Calendar Heatmap chart](https://raw.githubusercontent.com/DKirwan/calendar-heatmap/develop/example/thumbnail.png)
+![Reusable D3.js Calendar Heatmap chart](https://pbs.twimg.com/media/EqSQMiqUcAAetMl?format=jpg&name=large)
 
 # [Demo Link](http://www.dominikangerer.com/projects/vuejs-heatmap/)
 
